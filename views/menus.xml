@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Root Menu -->
+    <menuitem id="menu_assetflow_root" name="AssetFlow" web_icon="base,static/description/icon.png" sequence="10"/>
+
+    <!-- Sub-menus Categories -->
+    <menuitem id="menu_assetflow_dashboard" name="Dashboard" parent="menu_assetflow_root" sequence="10"/>
+    <menuitem id="menu_assetflow_assets_cat" name="Assets &amp; Bookings" parent="menu_assetflow_root" sequence="20"/>
+    <menuitem id="menu_assetflow_operations" name="Operations" parent="menu_assetflow_root" sequence="30"/>
+    <menuitem id="menu_assetflow_configuration" name="Configuration" parent="menu_assetflow_root" sequence="40"/>
+</odoo>
