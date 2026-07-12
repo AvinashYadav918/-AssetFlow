@@ -15,6 +15,7 @@
         'views/menus.xml',
         'views/organization_views.xml',
         'views/asset_views.xml',
+        'views/operations_views.xml',
     ],
     'installable': True,
     'application': True,
