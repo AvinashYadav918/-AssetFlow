@@ -14,6 +14,7 @@
         'security/ir.model.access.csv',
         'views/menus.xml',
         'views/organization_views.xml',
+        'views/asset_views.xml',
     ],
     'installable': True,
     'application': True,
