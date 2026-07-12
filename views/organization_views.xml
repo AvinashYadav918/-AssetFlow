@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Department Views -->
+    <record id="view_assetflow_department_tree" model="ir.ui.view">
+        <name>assetflow.department.tree</name>
+        <model>assetflow.department</model>
+        <arch type="xml">
+            <tree string="Departments">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="manager_id"/>
+                <field name="parent_id"/>
+                <field name="active"/>
+            </tree>
+        </arch>
+    </record>
+
+    <record id="view_assetflow_department_form" model="ir.ui.view">
+        <name>assetflow.department.form</name>
+        <model>assetflow.department</model>
+        <arch type="xml">
+            <form string="Department">
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="bg-danger" attrs="{'invisible': [('active', '=', True)]}"/>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                        </group>
+                        <group>
+                            <field name="manager_id"/>
+                            <field name="parent_id"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Sub-departments" name="sub_depts">
+                            <field name="child_ids" readonly="1"/>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </arch>
+    </record>
+
+    <record id="action_assetflow_department" model="ir.actions.act_window">
+        <name>Departments</name>
+        <res_model>assetflow.department</res_model>
+        <view_mode>tree,form</view_mode>
+    </record>
+
+    <!-- Employee Directory Views -->
+    <record id="view_assetflow_employee_tree" model="ir.ui.view">
+        <name>assetflow.employee.tree</name>
+        <model>assetflow.employee</model>
+        <arch type="xml">
+            <tree string="Employee Directory">
+                <field name="name"/>
+                <field name="email"/>
+                <field name="department_id"/>
+                <field name="role"/>
+                <field name="status"/>
+            </tree>
+        </arch>
+    </record>
+
+    <record id="view_assetflow_employee_form" model="ir.ui.view">
+        <name>assetflow.employee.form</name>
+        <model>assetflow.employee</model>
+        <arch type="xml">
+            <form string="Employee">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="email"/>
+                            <field name="user_id"/>
+                        </group>
+                        <group>
+                            <field name="department_id"/>
+                            <field name="role"/>
+                            <field name="status"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </arch>
+    </record>
+
+    <record id="action_assetflow_employee" model="ir.actions.act_window">
+        <name>Employee Directory</name>
+        <res_model>assetflow.employee</res_model>
+        <view_mode>tree,form</view_mode>
+    </record>
+
+    <!-- Menu Items Linkage -->
+    <menuitem id="menu_assetflow_department_action" name="Departments" parent="menu_assetflow_configuration" action="action_assetflow_department" sequence="10"/>
+    <menuitem id="menu_assetflow_employee_action" name="Employee Directory" parent="menu_assetflow_configuration" action="action_assetflow_employee" sequence="20"/>
+</odoo>
