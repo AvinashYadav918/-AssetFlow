@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Asset Tree View -->
+    <record id="view_asset_tree" model="ir.ui.view">
+        <name>assetflow.asset.tree</name>
+        <model>assetflow.asset</model>
+        <arch type="xml">
+            <tree string="Asset Registry" decoration-info="state == 'available'" decoration-warning="state == 'allocated'" decoration-danger="state == 'maintenance'">
+                <field name="asset_tag"/>
+                <field name="name"/>
+                <field name="category_id"/>
+                <field name="serial_number"/>
+                <field name="location"/>
+                <field name="is_shared"/>
+                <field name="state" widget="badge"/>
+            </tree>
+        </arch>
+    </record>
+
+    <!-- Asset Form View -->
+    <record id="view_asset_form" model="ir.ui.view">
+        <name>assetflow.asset.form</name>
+        <model>assetflow.asset</model>
+        <arch type="xml">
+            <form string="Asset">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="available,allocated,maintenance,lost"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="asset_tag" readonly="1"/>
+                        </h1>
+                        <h2>
+                            <field name="name" placeholder="e.g. MacBook Pro 16-inch"/>
+                        </h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="category_id"/>
+                            <field name="serial_number"/>
+                            <field name="location"/>
+                        </group>
+                        <group>
+                            <field name="acquisition_date"/>
+                            <field name="acquisition_cost"/>
+                            <field name="condition"/>
+                            <field name="is_shared"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </arch>
+    </record>
+
+    <!-- Resource Booking Calendar View (Screen 6 Requirement) -->
+    <record id="view_booking_calendar" model="ir.ui.view">
+        <name>assetflow.booking.calendar</name>
+        <model>assetflow.booking</model>
+        <arch type="xml">
+            <calendar string="Resource Bookings" date_start="start_time" date_stop="end_time" color="asset_id" mode="week">
+                <field name="employee_id"/>
+                <field name="asset_id"/>
+                <field name="state"/>
+            </calendar>
+        </arch>
+    </record>
+
+    <!-- Actions for Asset & Bookings -->
+    <record id="action_asset_registry" model="ir.actions.act_window">
+        <name>Asset Registry</name>
+        <res_model>assetflow.asset</res_model>
+        <view_mode>tree,form</view_mode>
+    </record>
+
+    <record id="action_resource_booking" model="ir.actions.act_window">
+        <name>Resource Bookings</name>
+        <res_model>assetflow.booking</res_model>
+        <view_mode>calendar,tree,form</view_mode>
+    </record>
+
+    <!-- Menu Links -->
+    <menuitem id="menu_asset_registry_action" name="Asset Directory" parent="menu_assetflow_assets_cat" action="action_asset_registry" sequence="10"/>
+    <menuitem id="menu_resource_booking_action" name="Shared Bookings" parent="menu_assetflow_assets_cat" action="action_resource_booking" sequence="20"/>
+</odoo>
